@@ -162,8 +162,3 @@ extract () {
 
  fi
  }
-
-
-#test
-#clear
-#echo -ne "Salut, $USER ! Aujourd'hui, on est le, "; date
