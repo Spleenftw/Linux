@@ -43,7 +43,7 @@ esac
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
-#force_color_prompt=yes
+# force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
@@ -119,19 +119,24 @@ fi
 
 
 ### Aliases
+alias plane="bash /home/spleenftw/Github/Linux/Scripts/plane.sh"
+alias planequit="nmcli r all on"
 alias maj="sudo apt update && sudo apt upgrade -y"
 alias ls="ls -l --color"
 alias shutd="systemctl poweroff -i"
 alias pingg="ping 8.8.8.8"
-alias bashrc="vim ~/.bashrc && source ~/.bashrc"
-alias compil="bash ~/Documents/Scripts/gcc.sh"
-alias temp="bash ~/Documents/Scripts/temp.sh"
+alias bashrc="nvim ~/.bashrc && source ~/.bashrc"
+alias compil="bash /home/spleenftw/Github/Linux/Scripts/gcc.sh"
+alias temp="bash /home/spleenftw/Github/Linux/Scripts/temp.sh"
 alias veille="systemctl suspend"
 alias mjstd="maj && shutd"
-alias déco="gnome-session-quit"
+alias lout="gnome-session-quit"
 alias pssh="nmap -sV"
 alias ascan="sudo arp-scan -l"
 alias p3="python3"
+alias v="nvim"
+alias h="history"
+alias iwscan="sudo iw wlp1s0 scan"
 
 #PROMPT
 PS1='\[\e[0m\][\[\e[m\] \[\e[0;1;2;38;5;69m\]\u\[\e[m\] \[\e[0m\]|\[\e[m\] \[\e[0;1;2;91m\]\t\[\e[m\] \[\e[0m\]]\[\e[m\] \[\e[0m\]>\[\e[0m\]>\[\e[m\] \[\e[0;1;4;38;5;120m\]\w\[\e[m\] \[\e[0m\]:\[\e[m\] \[\e0'
@@ -146,7 +151,8 @@ extract () {
       case $1 in
           *.tar.bz2)   tar xvjf $1    ;;
           *.tar.gz)    tar xvzf $1    ;;
-          *.bz2)       bunzip2 $1     ;;
+	  *.tar.xz)    tar xf $1    ;;
+	  *.bz2)       bunzip2 $1     ;;
           *.rar)       rar x $1       ;;
           *.gz)        gunzip $1      ;;
           *.tar)       tar xvf $1     ;;
@@ -161,4 +167,10 @@ extract () {
       echo "'$1' is not a valid file!"
 
  fi
- }
+ 
+}
+#History
+export HISTCONTROL=ignorespace:erasedups
+export HISTTIMEFORMAT="%d %h %H:%M:%S "
+PROMPT_COMMAND='history -a'
+export HISTIGNORE="ls:ps:h:history:bashrc:exit"
